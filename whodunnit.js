@@ -13,6 +13,7 @@ console.group("Episode 1");
     const verdict = declareMurderer();
     /* Should be Miss Scarlet */
     console.log(verdict);
+    console.assert(verdict === "The murderer is Miss Scarlet.")
 }
 console.groupEnd();
 
@@ -21,7 +22,8 @@ console.group("Episode 2");
     const murderer = 'Professor Plum';
 
     const changeMurderer = function() {
-        murderer = 'Mrs. Peacock';
+        // Assignment to const variable
+        //murderer = 'Mrs. Peacock';
     }
 
     const declareMurderer = function() {
@@ -31,7 +33,9 @@ console.group("Episode 2");
     changeMurderer();
     const verdict = declareMurderer();
     /* Error: can't assign to a const variable */
+    /* after commenting out, Professor Plum */
     console.log(verdict);
+    console.assert(verdict === "The murderer is Professor Plum.")
 }
 console.groupEnd();
 
@@ -47,10 +51,12 @@ console.group("Episode 3");
     const firstVerdict = declareMurderer();
     /* Mrs Peacock */
     console.log('First Verdict: ', firstVerdict);
+    console.assert(firstVerdict === "The murderer is Mrs. Peacock.")
 
     const secondVerdict = `The murderer is ${murderer}.`;
     /* Professor Plumb */
     console.log('Second Verdict: ', secondVerdict);
+    console.assert(secondVerdict === "The murderer is Professor Plum.")
 }
 console.groupEnd();
 
@@ -68,8 +74,10 @@ console.group("Episode 4");
     const suspects = declareAllSuspects();
     /* Miss Scarlet, Professor Plum and Colonel Mustard */
     console.log(suspects);
+    console.assert(suspects === "The suspects are Miss Scarlet, Professor Plum, Colonel Mustard.")
     /* Mrs Peacock */
     console.log(`Suspect three is ${suspectThree}.`);
+    console.assert(suspectThree === "Mrs. Peacock")
 }
 console.groupEnd();
 
@@ -93,6 +101,7 @@ console.group("Episode 5");
     const verdict = declareWeapon();
     /* Revolver */
     console.log(verdict);
+    console.assert(verdict === "The weapon is the Revolver.")
 }
 console.groupEnd();
 
@@ -118,6 +127,7 @@ console.group("Episode 6");
     const verdict = declareMurderer();
     /* Mrs. White */
     console.log(verdict);
+    console.assert(verdict === "The murderer is Mrs. White.")
 }
 console.groupEnd();
 
@@ -149,6 +159,7 @@ console.group("Episode 7");
     const verdict = declareMurderer();
     /* Mr. Green */
     console.log(verdict);
+    console.assert(verdict === "The murderer is Mr. Green.")
 }
 console.groupEnd();
 
@@ -189,6 +200,7 @@ console.group("Episode 8");
     const verdict = declareWeapon();
     /* Candle Stick */
     console.log(verdict);
+    console.assert(verdict === "The weapon is Candle Stick.")
 }
 console.groupEnd();
 
@@ -207,5 +219,25 @@ console.group("Episode 9");
     const verdict = declareMurderer();
     /* Professor Plum */
     console.log(verdict);
+    console.assert(verdict === "The murderer is Professor Plum.")
+}
+console.groupEnd();
+
+/* NB. console.assert just prints a message?!  No exception with backtrace? :-( */
+
+console.group("Episode 10");
+{
+    const murderScene = () => {
+        let murderer = "Mrs. Peacock";
+
+        const switchMurderer = (newMurderer) => murderer = newMurderer;
+        const declareMurderer = () => `The murderer is ${murderer}.`;
+        return [switchMurderer, declareMurderer];
+    };
+
+    const [switchMurderer, declareMurderer] = murderScene();
+    switchMurderer("Professor Plum");
+    /* Professor Plum */
+    console.log(declareMurderer());
 }
 console.groupEnd();
